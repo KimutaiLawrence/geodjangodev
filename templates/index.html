@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load leaflet_tags %}
+    {% load static %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <title>Our Home</title>
+    <style type="text/css">
+        #map { width: 90%; height: 80vh; }
+        /* Set the map's height to 100% of the viewport height */
+    </style>
+    <script type="text/javascript" src="{% static 'leaflet.ajax.js' %}"></script>
+</head>
+<body>
+    <h3>Welcome to Geospatial Primetech</h3>
+    <br>
+    <script type="text/javascript">
+        function our_layers(map, options){
+            var datasets = new L.GeoJSON.AJAX("{% url 'county' %}",{
+
+            });
+
+            datasets.addTo(map);
+        }
+    </script>
+    <div id="map"></div>
+    {% leaflet_map "map" callback="our_layers" %}
+</body>
+</html>
